@@ -6,11 +6,11 @@
 /*   By: rigel <rigel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/06 07:30:03 by rigel             #+#    #+#             */
-/*   Updated: 2022/02/08 01:32:48 by rigel            ###   ########.fr       */
+/*   Updated: 2022/02/26 16:04:06 by rigel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "pipex_bonus.h"
 
 char	*ft_strjoin(char const *s1, char const *s2)
 {
@@ -18,7 +18,8 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	size_t	i;
 	size_t	j;
 
-	j_str = (char *)malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
+	j_str = (char *)malloc(sizeof(char) * (ft_strlen((char *)s1)
+				+ ft_strlen((char *)s2) + 1));
 	if (!j_str)
 		return (NULL);
 	i = 0;

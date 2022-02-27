@@ -3,12 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rigel <rigel@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ayblin <ayblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 11:27:36 by ayblin            #+#    #+#             */
-/*   Updated: 2022/02/08 01:32:48 by rigel            ###   ########.fr       */
+/*   Updated: 2022/02/17 21:02:37 by ayblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "pipex.h"
 
 static	int	ft_countwords(const	char	*str, char c)
 {
@@ -30,7 +32,20 @@ static	int	ft_countwords(const	char	*str, char c)
 	return (n);
 }
 
-static char	*ft_get_words(const	char *str, char c,char **tab)
+static void	ft_malloc_error(char **tab)
+{
+	unsigned int	i;
+
+	i = 0;
+	while (tab[i])
+	{
+		free(tab[i]);
+		i++;
+	}
+	free(tab);
+}
+
+static char	*ft_get_words(const	char *str, char c, char **tab)
 {
 	char	*ret;
 	int		i;
@@ -42,8 +57,10 @@ static char	*ft_get_words(const	char *str, char c,char **tab)
 		len++;
 	ret = malloc(sizeof(char) * (len + 1));
 	if (!ret)
-        return (ft_malloc_error(tab));
-
+	{
+		ft_malloc_error(tab);
+		return (NULL);
+	}
 	while (i < len)
 	{
 		ret[i] = str[i];
@@ -51,20 +68,6 @@ static char	*ft_get_words(const	char *str, char c,char **tab)
 	}
 	ret[i] = '\0';
 	return (ret);
-}
-
-static char			**ft_malloc_error(char **tab)
-{
-	unsigned int	i;
-
-	i = 0;
-	while (tab[i])
-	{
-		free(tab[i]);
-		i++;
-	}
-	free(tab);
-	return (0);
 }
 
 char	**ft_split(char const *s, char c)
@@ -84,6 +87,8 @@ char	**ft_split(char const *s, char c)
 	while (*s)
 	{
 		tab[i] = ft_get_words(s, c, tab);
+		if (!tab[i])
+			return (NULL);
 		i++;
 		while (*s != c && *s)
 			s++;
