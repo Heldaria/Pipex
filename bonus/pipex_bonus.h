@@ -6,7 +6,7 @@
 /*   By: rigel <rigel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 09:29:29 by ayblin            #+#    #+#             */
-/*   Updated: 2022/03/02 14:04:27 by rigel            ###   ########.fr       */
+/*   Updated: 2022/03/02 23:47:32 by rigel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ typedef struct s_pipex
 	int		cmd_nbs;
 	int		pipe_nbs;
 	int		fdin;
-	int		*tube;
+	int		*pipe_fd;
 	int		idx; 
 	char	*paths;
 	int		fdout; 
