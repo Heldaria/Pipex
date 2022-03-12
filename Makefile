@@ -38,7 +38,7 @@ $(NAME): $(OBJ) mandatory/pipex.h
 all: $(NAME)
 
 clean:
-	rm -f $(OBJ) $(BONUS_OBJ)
+	rm -f $(OBJ) $(BONUS_OBJ) $(GNL_OBJ) 
 
 fclean: clean
 	rm -f $(NAME)
