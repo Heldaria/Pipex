@@ -6,7 +6,7 @@
 /*   By: rigel <rigel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/26 11:34:18 by rigel             #+#    #+#             */
-/*   Updated: 2022/03/10 15:11:25 by rigel            ###   ########.fr       */
+/*   Updated: 2022/03/12 03:27:15 by rigel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int    child(t_pipex p, char **argv, char **envp)
 	i = 0;
 	if (pid == 0)
 	{
-		p.mycmdargs = ft_split(argv[p.idx + 2], ' ');
+		p.mycmdargs = ft_split(argv[p.idx + 2 + p.here_doc], ' ');
     	while (p.mypaths[i])
 		{
 	    	p.cmd = get_cmd(p.mypaths[i], p.mycmdargs[0]);
