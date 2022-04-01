@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: llepiney <llepiney@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rigel <rigel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/03 01:39:50 by rigel             #+#    #+#             */
-/*   Updated: 2022/04/01 14:46:13 by llepiney         ###   ########.fr       */
+/*   Updated: 2022/02/26 14:45:44 by rigel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,11 @@ int	main(int argc, char **argv, char **envp)
 	t_pipex	pipex;
 
 	if (argc != 5)
-		return (ft_msg("Invalid number of arguments.\n"));
+		return (ft_msg("invalid number of arguments"));
 	pipex.fdin = open(argv[1], O_RDONLY);
 	pipex.fdout = open(argv[4], O_TRUNC | O_CREAT | O_RDWR, 0000644);
 	if (pipex.fdin < 0 || pipex.fdout < 0)
-		return (ft_msg("Failed to open infile or outfile.\n"));
+		return (ft_msg("failed to open infile or outfile"));
 	pipex.path_from_envp = find_path(envp);
 	pipex.mypaths = ft_split(pipex.path_from_envp, ':');
 	pipe(pipex.tube);
