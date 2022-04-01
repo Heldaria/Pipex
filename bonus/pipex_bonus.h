@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rigel <rigel@student.42.fr>                +#+  +:+       +#+        */
+/*   By: llepiney <llepiney@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 09:29:29 by ayblin            #+#    #+#             */
-/*   Updated: 2022/03/11 08:36:52 by rigel            ###   ########.fr       */
+/*   Updated: 2022/03/12 23:05:35 by llepiney         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,17 +22,16 @@
 # include <sys/types.h>
 # include <sys/uio.h>
 # include <stdlib.h>
-#include "../gnl/get_next_line.h"
+# include "../gnl/get_next_line.h"
 
 typedef struct s_pipex
 {
 	int		cmd_nbs;
 	int		pipe_nbs;
 	int		fdin;
-	int		*pipe_fd;
-	int		idx; 
+	int		fdout;
+	int		idx;
 	char	*paths;
-	int		fdout; 
 	char	**mypaths;
 	char	*path_from_envp;
 	char	*cmd;
@@ -46,7 +45,6 @@ int		ft_msg(char *str);
 char	**ft_split(char const *s, char c);
 void	child_free(t_pipex *pipex);
 void	parent_free(t_pipex *pipex);
-char	*ft_strjoin(char *s1, char *s2);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 void	get_infile(char **argv, t_pipex *pipex);
 void	get_outfile(char *argv, t_pipex *pipex);

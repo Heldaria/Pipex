@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   file.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rigel <rigel@student.42.fr>                +#+  +:+       +#+        */
+/*   By: llepiney <llepiney@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/11 04:37:30 by rigel             #+#    #+#             */
-/*   Updated: 2022/03/12 03:32:05 by rigel            ###   ########.fr       */
+/*   Updated: 2022/04/01 15:33:14 by llepiney         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	get_infile(char **argv, t_pipex *pipex)
 	{
 		pipex->fdin = open(argv[1], O_RDONLY);
 		if (pipex->fdin < 0)
-			ft_msg("Failed to open infile.");
+			ft_msg("Failed to open infile.\n");
 	}
 }
 
@@ -31,7 +31,7 @@ void	get_outfile(char *argv, t_pipex *pipex)
 	else
 		pipex->fdout = open(argv, O_CREAT | O_RDWR | O_TRUNC, 0000644);
 	if (pipex->fdout < 0)
-		ft_msg("Failed to open outfile.");
+		ft_msg("Failed to open outfile.\n");
 }
 
 void	here_doc(char *argv, t_pipex *pipex)
@@ -41,15 +41,18 @@ void	here_doc(char *argv, t_pipex *pipex)
 
 	file = open(".heredoc_tmp", O_CREAT | O_WRONLY | O_TRUNC, 0000644);
 	if (file < 0)
-		ft_msg("error here_doc");
+		ft_msg("Error here_doc.\n");
 	while (1)
 	{
 		write(1, "heredoc> ", 9);
 		buf = get_next_line(0);
 		if (!buf)
-            exit (1);
+		{
+			free(buf);
+			exit (1);
+		}
 		if (!ft_strncmp(argv, buf, ft_strlen(argv)))
-			break;
+			break ;
 		write(file, buf, ft_strlen(buf));
 		free(buf);
 	}
@@ -59,6 +62,6 @@ void	here_doc(char *argv, t_pipex *pipex)
 	if (pipex->fdin < 0)
 	{
 		unlink(".heredoc_tmp");
-		ft_msg("error here_doc");
+		ft_msg("Error here_doc.\n");
 	}
 }

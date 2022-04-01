@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   childs_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rigel <rigel@student.42.fr>                +#+  +:+       +#+        */
+/*   By: llepiney <llepiney@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/26 11:34:18 by rigel             #+#    #+#             */
-/*   Updated: 2022/03/12 03:27:15 by rigel            ###   ########.fr       */
+/*   Updated: 2022/04/01 14:51:09 by llepiney         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,18 +23,9 @@ static char	*get_cmd(char *path, char *cmd)
 	return (command);
 }
 
-int    child(t_pipex p, char **argv, char **envp)
+static void	ft_fds(t_pipex p, pid_t pid, int *pipe_fd)
 {
-    int 	i;
-	pid_t	pid;
-	int		pipe_fd[2];
-
-	if (pipe(pipe_fd) <  0)
-		return (-1);
-	pid = fork();
-	if (pid == -1)
-		return(-1);
-    if (pid == 0)
+	if (pid == 0)
 	{
 		if (p.idx == (p.cmd_nbs - 1))
 			dup2(p.fdout, 1);
@@ -47,21 +38,35 @@ int    child(t_pipex p, char **argv, char **envp)
 			close(pipe_fd[0]);
 		}
 	}
-    else
+	else
 	{
 		dup2(pipe_fd[0], 0);
 		close(pipe_fd[1]);
 		close(pipe_fd[0]);
 	}
+}
+
+int	child(t_pipex p, char **argv, char **envp)
+{
+	int		i;
+	pid_t	pid;
+	int		pipe_fd[2];
+
+	if (pipe(pipe_fd) < 0)
+		return (-1);
+	pid = fork();
+	if (pid == -1)
+		return (-1);
+	ft_fds(p, pid, pipe_fd);
 	i = 0;
 	if (pid == 0)
 	{
 		p.mycmdargs = ft_split(argv[p.idx + 2 + p.here_doc], ' ');
-    	while (p.mypaths[i])
+		while (p.mypaths[i])
 		{
-	    	p.cmd = get_cmd(p.mypaths[i], p.mycmdargs[0]);
-	    	execve(p.cmd, p.mycmdargs, envp);
-	    	i++;
+			p.cmd = get_cmd(p.mypaths[i], p.mycmdargs[0]);
+			execve(p.cmd, p.mycmdargs, envp);
+			i++;
 		}
 		child_free(&p);
 		write(2, "Command not found.\n", 19);

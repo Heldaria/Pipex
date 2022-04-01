@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   childs.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rigel <rigel@student.42.fr>                +#+  +:+       +#+        */
+/*   By: llepiney <llepiney@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/06 03:15:20 by rigel             #+#    #+#             */
-/*   Updated: 2022/02/26 16:34:56 by rigel            ###   ########.fr       */
+/*   Updated: 2022/04/01 14:45:38 by llepiney         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	child_process1(t_pipex pipex, char **argv, char **envp)
 		i++;
 	}
 	child_free(&pipex);
-	write(2, "command not found\n", 18);
+	write(2, "Command not found.\n", 18);
 }
 
 void	child_process2(t_pipex pipex, char **argv, char **envp)
@@ -59,5 +59,5 @@ void	child_process2(t_pipex pipex, char **argv, char **envp)
 		i++;
 	}
 	child_free(&pipex);
-	write(2, "command not found\n", 18);
+	write(2, "Command not found.\n", 18);
 }
