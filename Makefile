@@ -17,7 +17,7 @@ SRC_BONUS = $(addprefix bonus/, \
 			file.c)
 
 GNL = 	gnl/get_next_line.c \
-		gnl/get_next_line_utils.c 
+		gnl/get_next_line_utils.c
 
 OBJ = $(SRC:.c=.o)
 

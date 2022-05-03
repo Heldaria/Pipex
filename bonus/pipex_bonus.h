@@ -6,7 +6,7 @@
 /*   By: llepiney <llepiney@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 09:29:29 by ayblin            #+#    #+#             */
-/*   Updated: 2022/03/12 23:05:35 by llepiney         ###   ########.fr       */
+/*   Updated: 2022/04/01 19:41:20 by llepiney         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,8 @@ char	**ft_split(char const *s, char c);
 void	child_free(t_pipex *pipex);
 void	parent_free(t_pipex *pipex);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
-void	get_infile(char **argv, t_pipex *pipex);
-void	get_outfile(char *argv, t_pipex *pipex);
+int		get_infile(char **argv, t_pipex *pipex);
+int		get_outfile(char *argv, t_pipex *pipex);
 void	here_doc(char *argv, t_pipex *pipex);
 
 #endif

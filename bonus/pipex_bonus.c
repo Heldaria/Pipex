@@ -6,7 +6,7 @@
 /*   By: llepiney <llepiney@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 16:10:06 by ayblin            #+#    #+#             */
-/*   Updated: 2022/04/01 16:39:44 by llepiney         ###   ########.fr       */
+/*   Updated: 2022/04/01 19:47:10 by llepiney         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ char	*find_path(char **envp)
 int	ft_msg(char *str)
 {
 	write(2, str, ft_strlen(str));
-	write(2, "\n", 1);
 	return (1);
 }
 
@@ -45,12 +44,11 @@ int	main(int argc, char **argv, char **envp)
 	t_pipex	pipex;
 
 	if (argc < args_count(argv[1], &pipex))
-		return (ft_msg("invalid number of arguments."));
+		return (ft_msg("Invalid number of arguments.\n"));
+	if (!get_infile(argv, &pipex) || !get_outfile(argv[argc - 1], &pipex))
+		return (0);
 	pipex.idx = -1;
 	pipex.cmd_nbs = argc - 3 - pipex.here_doc;
-	pipex.pipe_nbs = (pipex.cmd_nbs - 1) * 2;
-	get_infile(argv, &pipex);
-	get_outfile(argv[argc - 1], &pipex);
 	pipex.path_from_envp = find_path(envp);
 	pipex.mypaths = ft_split(pipex.path_from_envp, ':');
 	while (++(pipex.idx) < pipex.cmd_nbs)
